@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>カバネリ2 検証カウンター</title>
+<style>
+:root{--bg:#090b0f;--card:#171b23;--inner:#0f1218;--text:#f7f8fb;--muted:#9aa3b2;--blue:#2e7df6;--orange:#b56822;--green:#258153;--red:#8d3535;--line:#2a303b;--violet:#6451a6;--gold:#7d6422}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}main{max-width:760px;margin:auto;padding:calc(env(safe-area-inset-top) + 12px) 10px calc(env(safe-area-inset-bottom) + 26px)}h1{font-size:21px;margin:6px 2px 12px}.card{background:var(--card);border-radius:18px;padding:12px;margin:10px 0}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px}input{width:100%;font-size:28px;background:var(--inner);border:1px solid var(--line);color:#fff;border-radius:12px;padding:11px;text-align:center}button{border:0;border-radius:12px;padding:7px 4px;background:#272e39;color:#fff;font-weight:800;font-size:13px;touch-action:manipulation}button:active{transform:scale(.98);opacity:.8}.blue{background:var(--blue)}.orange{background:var(--orange)}.green{background:var(--green)}.violet{background:var(--violet)}.red{background:var(--red)}.gold{background:var(--gold)}.charHead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px}.charHead b{font-size:22px}.charHead span{font-size:12px;color:var(--muted)}.substats{margin-top:8px;padding:10px;background:var(--inner);border-radius:12px;font-size:12px;line-height:1.72;color:#cfd5df}.substats b{color:#fff}.hitTotal{display:flex;justify-content:space-between;align-items:center;margin:9px 0 0;padding:10px 12px;background:var(--inner);border-radius:12px}.hitTotal span{color:var(--muted);font-size:12px}.hitTotal strong{font-size:22px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:7px}.stat{background:var(--inner);padding:11px;border-radius:12px}.stat small{display:block;color:var(--muted);font-size:11px}.stat strong{display:block;font-size:20px;margin-top:4px}.notice{background:var(--inner);padding:11px;border-radius:12px;font-size:13px;line-height:1.5;margin-top:8px}.toolbar{display:flex;gap:8px}.toolbar button{flex:1;min-height:50px}.log{margin-top:8px;background:var(--inner);border-radius:12px;padding:8px;max-height:170px;overflow:auto;font-size:11px;color:#cbd1db}.log div{padding:4px 0;border-bottom:1px solid #222833}.sectionLabel{font-size:12px;color:var(--muted);margin:2px 0 7px}.hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px}.counter{background:#272e39;border-radius:14px;padding:8px}.counter.orangeBox{background:#8c511d}.counter.greenBox{background:#1c6842}.counter.violetBox{background:#4b3f80}.counter.goldBox{background:#6a541f}.counter .cap{display:block;font-size:10px;line-height:1.25;text-align:center;min-height:25px;margin-bottom:6px}.counterRow{display:grid;grid-template-columns:36px 1fr 36px;gap:5px;align-items:center}.counterRow button{height:38px;min-height:38px;font-size:22px;padding:0}.counterRow input{height:44px;font-size:25px;padding:3px 2px;background:#0e1117;border:1px solid rgba(255,255,255,.14);border-radius:10px}.counter input::-webkit-outer-spin-button,.counter input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.counter input[type=number]{-moz-appearance:textfield}.ptbox{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.pt{background:var(--inner);padding:10px;border-radius:12px}.pt small{color:var(--muted);display:block;font-size:10px}.pt strong{font-size:22px}.specialGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.specialGrid button{min-height:48px;font-size:11px;line-height:1.25}.mutedline{font-size:10px;color:var(--muted);line-height:1.5;margin-top:6px}.periodGrid{display:grid;grid-template-columns:44px 1fr 1fr 70px;gap:6px;align-items:center}.periodGrid>div{background:var(--inner);border-radius:10px;padding:8px 6px;text-align:center}.periodGrid .head{font-size:10px;color:var(--muted);background:transparent;padding:2px}.periodGrid .pno{font-weight:800}.miniCounter{display:grid;grid-template-columns:30px 1fr 30px;gap:3px;align-items:center}.miniCounter button{height:34px;font-size:20px;padding:0}.miniCounter input{height:38px;font-size:21px;padding:2px}.wideStat{grid-column:1/-1}
+@media(max-width:430px){.grid3{gap:5px}.card{padding:11px}.substats{font-size:11px}.counter{padding:6px}.counterRow{grid-template-columns:31px 1fr 31px;gap:3px}.counterRow button{height:35px;min-height:35px;font-size:20px}.counterRow input{height:40px;font-size:22px}.counter .cap{font-size:9.5px}}
+</style>
+</head>
+<body><main>
+<h1>カバネリ2 検証カウンター β8</h1>
+<section class="card">
+ <div class="grid2"><div><label>総ゲーム数（全部込み）</label><input id="games" type="number" inputmode="numeric" min="0" value="0"></div><div><label>下段ベル回数</label><input id="bells" type="number" inputmode="numeric" min="0" value="0"></div></div>
+ <div class="grid2" style="margin-top:8px"><button id="bellMinus">下段ベル −1</button><button id="bellPlus" class="blue">下段ベル +1</button></div>
+ <div class="substats">下段ベル：<b id="bellRate">-</b></div>
+</section>
+<div id="characters"></div>
+<section class="card">
+ <div class="sectionLabel">推定pt補助（前作準拠の仮説値）</div>
+ <div class="specialGrid">
+  <button data-sp="mu-ku-n">複合 無名＋来栖<br>通常 +15ptずつ</button><button class="orange" data-sp="mu-ku-h">複合 無名＋来栖<br>高確 +30ptずつ</button>
+  <button data-sp="mu-ik-n">複合 無名＋生駒<br>通常 +15ptずつ</button><button class="orange" data-sp="mu-ik-h">複合 無名＋生駒<br>高確 +30ptずつ</button>
+  <button data-sp="ku-ik-n">複合 来栖＋生駒<br>通常 +15ptずつ</button><button class="orange" data-sp="ku-ik-h">複合 来栖＋生駒<br>高確 +30ptずつ</button>
+  <button class="violet" data-sp="all-n">オールスター 通常<br>全員 +30pt</button><button class="gold" data-sp="all-h">オールスター 高確<br>全員 +60pt</button>
+ </div>
+ <div class="mutedline">通常発光・帯付き発光は各15ptとして自動加算。非発光単独目は各キャラの「非発光チャンス目 +1」で1pt加算。複合/オールスターはここから入力。</div>
+</section>
+<section class="card">
+ <div class="sectionLabel">設定判別（無名＋生駒のみ）</div>
+ <div class="stats">
+  <div class="stat"><small>無名 CZ</small><strong id="mumei-summary">-</strong></div>
+  <div class="stat"><small>生駒 CZ</small><strong id="ikoma-summary">-</strong></div>
+  <div class="stat"><small>無名＋生駒 CZ合算</small><strong id="mi-summary">-</strong></div>
+  <div class="stat"><small>暫定評価</small><strong id="mi-eval">-</strong></div>
+ </div>
+ <div class="notice" id="assumption">CZ直前状態を検証中。</div>
+ <div class="hint">暫定目安：設定6実戦値は無名＋生駒合算で約1/215〜1/225。～1/210＝かなり強い、1/211〜230＝高設定期待、1/231〜260＝判断保留、1/261〜300＝弱め、1/300超＝かなり弱い。サンプル不足時は参考扱い。</div>
+</section>
+<section class="card">
+ <div class="sectionLabel">周期別ボーナス当選</div>
+ <div class="periodGrid" id="periodGrid"></div>
+ <div class="hint">「到達」はその周期まで進んだ回数、「当選」はその周期でボーナスに当たった回数。3周期・4周期は設定差が大きいため重点表示。</div>
+</section>
+<section class="card">
+ <div class="sectionLabel">ボーナス / ST</div>
+ <div class="grid3">
+  <div class="counter"><span class="cap">駿城ボーナス</span><div class="counterRow"><button type="button" data-bonus-step="hayajiro" data-step="-1">−</button><input id="bonus-hayajiro" type="number" inputmode="numeric" min="0" value="0"><button type="button" data-bonus-step="hayajiro" data-step="1">＋</button></div></div>
+  <div class="counter"><span class="cap">エピソードボーナス</span><div class="counterRow"><button type="button" data-bonus-step="episode" data-step="-1">−</button><input id="bonus-episode" type="number" inputmode="numeric" min="0" value="0"><button type="button" data-bonus-step="episode" data-step="1">＋</button></div></div>
+  <div class="counter greenBox"><span class="cap">ST初当たり</span><div class="counterRow"><button type="button" data-bonus-step="st" data-step="-1">−</button><input id="bonus-st" type="number" inputmode="numeric" min="0" value="0"><button type="button" data-bonus-step="st" data-step="1">＋</button></div></div>
+ </div>
+ <div class="stats" style="margin-top:8px">
+  <div class="stat"><small>ボーナス初当たり合算</small><strong id="bonus-total-rate">-</strong></div>
+  <div class="stat"><small>駿城確率</small><strong id="hayajiro-rate">-</strong></div>
+  <div class="stat"><small>エピボ確率</small><strong id="episode-rate">-</strong></div>
+  <div class="stat"><small>ST初当たり確率</small><strong id="st-rate">-</strong></div>
+ </div>
+ <div class="hint">駆け抜けは設定判別項目から除外。周期当選率・ボーナス初当たり・ST初当たりだけを追跡します。</div>
+</section>
+<section class="card">
+ <div class="sectionLabel">来栖（参考ログ・設定判別から完全除外）</div>
+ <div class="stats">
+  <div class="stat"><small>pt由来 周期到達</small><strong id="kurusu-summary">-</strong></div>
+  <div class="stat"><small>150G/300G 強制周期</small><strong id="kurusu-forced-summary">-</strong></div>
+  <div class="stat"><small>全周期到達</small><strong id="kurusu-all-summary">-</strong></div>
+  <div class="stat"><small>判定への使用</small><strong>除外</strong></div>
+ </div>
+ <div class="hint">強制周期とポイント天井が混在し、ポイント消化/持越しも未解析のため、来栖はCZ合算・高設定評価・平均到達ptの判定材料には使いません。</div>
+</section>
+<section class="card"><div class="toolbar"><button id="undo">1つ戻す</button><button id="reset" class="red">全リセット</button></div><div class="log" id="log"><div>まだログなし</div></div></section>
+</main>
+<script>
+(function(){
+'use strict';
+var KEY='kabaneriCounterV8';
+var META={mumei:{name:'無名',target:'CZ'},ikoma:{name:'生駒',target:'CZ'},kurusu:{name:'来栖',target:'周期到達'}};
+function emptyChar(){return {normal:0,band:0,offChance:0,fromNormal:0,fromBand:0,fromOff:0,ptCurrent:0,ptReached:[],forced:0};}
+function fresh(){return {games:0,bells:0,chars:{mumei:emptyChar(),ikoma:emptyChar(),kurusu:emptyChar()},periods:[null,{reach:0,hit:0},{reach:0,hit:0},{reach:0,hit:0},{reach:0,hit:0},{reach:0,hit:0},{reach:0,hit:0}],bonus:{hayajiro:0,episode:0,st:0},log:[]};}
+var state=fresh();try{var x=localStorage.getItem(KEY);if(x)state=JSON.parse(x);}catch(e){}
+Object.keys(META).forEach(function(k){state.chars[k]=Object.assign(emptyChar(),state.chars[k]||{});});
+if(!state.periods)state.periods=[null,{reach:0,hit:0},{reach:0,hit:0},{reach:0,hit:0},{reach:0,hit:0},{reach:0,hit:0},{reach:0,hit:0}];
+for(var pi=1;pi<=6;pi++)state.periods[pi]=Object.assign({reach:0,hit:0},state.periods[pi]||{});
+state.bonus=Object.assign({hayajiro:0,episode:0,st:0},state.bonus||{});
+var history=[];function totalHit(c){return c.fromNormal+c.fromBand+c.fromOff}function rate(g,n){return g>0&&n>0?'1/'+(g/n).toFixed(1):'-'}function pct(n,d){return d>0?(n/d*100).toFixed(1)+'%':'-'}function clean(v){v=Math.floor(Number(v)||0);return v<0?0:v}function avg(a){if(!a||!a.length)return '-';return (a.reduce(function(s,v){return s+v},0)/a.length).toFixed(1)+'pt'}function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}function snap(){history.push(JSON.stringify(state));if(history.length>100)history.shift()}function addLog(t){var d=new Date(),hh=('0'+d.getHours()).slice(-2),mm=('0'+d.getMinutes()).slice(-2);state.log.unshift(hh+':'+mm+' '+t);state.log=state.log.slice(0,120)}function setText(id,v){var e=document.getElementById(id);if(e)e.textContent=v}
+function counterHtml(k,a,label,boxClass){return '<div class="counter '+(boxClass||'')+'"><span class="cap">'+label+'</span><div class="counterRow"><button type="button" data-step="-1" data-a="'+a+'">−</button><input id="'+k+'-'+a+'" data-direct="1" data-a="'+a+'" type="number" inputmode="numeric" min="0" value="0"><button type="button" data-step="1" data-a="'+a+'">＋</button></div></div>'}
+function periodCounterHtml(i,a){return '<div class="miniCounter"><button type="button" data-period="'+i+'" data-pa="'+a+'" data-step="-1">−</button><input id="period-'+i+'-'+a+'" type="number" inputmode="numeric" min="0" value="0"><button type="button" data-period="'+i+'" data-pa="'+a+'" data-step="1">＋</button></div>';}
+function makePeriodGrid(){var g=document.getElementById('periodGrid');g.innerHTML='<div class="head">周期</div><div class="head">到達</div><div class="head">当選</div><div class="head">当選率</div>';for(var i=1;i<=6;i++){g.insertAdjacentHTML('beforeend','<div class="pno">'+i+'周期</div><div>'+periodCounterHtml(i,'reach')+'</div><div>'+periodCounterHtml(i,'hit')+'</div><div id="period-'+i+'-rate">-</div>');}}
+function makeCards(){var root=document.getElementById('characters');Object.keys(META).forEach(function(k){var m=META[k],refBadge=k==='kurusu'?'<span style="font-size:10px;color:#f0c96a">判定対象外</span>':'',forced=k==='kurusu'?'<div class="grid2" style="margin-top:7px">'+counterHtml(k,'forced','150G/300G 強制周期<br>（pt判定から除外）','goldBox')+'<button type="button" class="gold" data-force-reset="1" style="min-height:70px">強制周期 +1<br>推定pt区間も区切る</button></div>':'';root.insertAdjacentHTML('beforeend','<section class="card" data-char="'+k+'"><div class="charHead"><b>'+m.name+' '+refBadge+'</b><span>'+m.target+'</span></div><div class="grid3">'+counterHtml(k,'offChance','非発光チャンス目<br>推定 +1pt','')+counterHtml(k,'normal','通常発光<br>推定 +15pt','')+counterHtml(k,'band','帯付き発光<br>推定 +15pt','orangeBox')+'</div><div class="grid3" style="margin-top:7px">'+counterHtml(k,'fromNormal','通常発光 → '+m.target,'greenBox')+counterHtml(k,'fromBand','帯付き発光 → '+m.target,'violetBox')+counterHtml(k,'fromOff','非発光 → '+m.target,'')+'</div>'+forced+'<div class="hitTotal"><span>'+m.target+' 総回数（pt到達）</span><strong id="'+k+'-hitTotal">0</strong></div><div class="ptbox"><div class="pt"><small>現在の推定pt</small><strong id="'+k+'-ptCurrent">0pt</strong></div><div class="pt"><small>到達時推定pt 平均</small><strong id="'+k+'-ptAvg">-</strong></div></div><div class="substats">通常発光：<b id="'+k+'-normal-rate">-</b> ／ 帯付き発光：<b id="'+k+'-band-rate">-</b><br>通常→'+m.target+'：<b id="'+k+'-fromNormal-rate">-</b> ／ 帯→'+m.target+'：<b id="'+k+'-fromBand-rate">-</b><br>非発光→'+m.target+'：<b id="'+k+'-fromOff-rate">-</b> ／ '+m.target+'総合：<b id="'+k+'-hit-rate">-</b><br>参考：通常発光からの到達割合 <b id="'+k+'-conv">-</b><br>到達pt履歴：<b id="'+k+'-ptHist">-</b></div></section>');});}
+function redraw(){
+ setText('bellRate',rate(state.games,state.bells));
+ var directNonNormal=0;
+ Object.keys(META).forEach(function(k){
+  var c=state.chars[k],h=totalHit(c);
+  if(k!=='kurusu') directNonNormal+=c.fromBand+c.fromOff;
+  ['offChance','normal','band','fromNormal','fromBand','fromOff','forced'].forEach(function(a){
+   var inp=document.getElementById(k+'-'+a);
+   if(inp&&document.activeElement!==inp)inp.value=c[a]||0;
+   if(a!=='offChance'&&a!=='forced')setText(k+'-'+a+'-rate',rate(state.games,c[a]||0));
+  });
+  setText(k+'-hitTotal',h);
+  setText(k+'-hit-rate',rate(state.games,h));
+  setText(k+'-conv',pct(c.fromNormal,c.normal));
+  setText(k+'-summary',rate(state.games,h));
+  setText(k+'-ptCurrent',(c.ptCurrent||0)+'pt');
+  setText(k+'-ptAvg',avg(c.ptReached));
+  setText(k+'-ptHist',c.ptReached&&c.ptReached.length?c.ptReached.slice(-8).join(' / ')+'pt':'-');
+ });
+ var mh=totalHit(state.chars.mumei), ih=totalHit(state.chars.ikoma), mih=mh+ih;
+ setText('mi-summary',rate(state.games,mih));
+ var denom=(state.games>0&&mih>0)?state.games/mih:null;
+ var ev='-';
+ if(denom!==null){
+  if(denom<=210)ev='🔥 かなり強い';
+  else if(denom<=230)ev='🟢 高設定期待';
+  else if(denom<=260)ev='🟡 判断保留';
+  else if(denom<=300)ev='🟠 弱め';
+  else ev='🔴 かなり弱い';
+  if(mih<4)ev+='（少サンプル）';
+ }
+ setText('mi-eval',ev);
+ var kc=state.chars.kurusu,kh=totalHit(kc);
+ setText('kurusu-forced-summary',rate(state.games,kc.forced||0));
+ setText('kurusu-all-summary',rate(state.games,kh+(kc.forced||0)));
+ document.getElementById('assumption').innerHTML=directNonNormal===0?'✅ 無名・生駒は現在、帯付き/非発光からの直接CZを <b>0回</b> 観測。通常発光経由仮説を継続検証中。':'⚠️ 無名・生駒で帯付き/非発光からCZを合計 <b>'+directNonNormal+'回</b> 観測。通常発光のみ経由の前提は成立しません。';
+ for(var pi=1;pi<=6;pi++){var pp=state.periods[pi],pr=document.getElementById('period-'+pi+'-reach'),ph=document.getElementById('period-'+pi+'-hit');if(pr&&document.activeElement!==pr)pr.value=pp.reach;if(ph&&document.activeElement!==ph)ph.value=pp.hit;setText('period-'+pi+'-rate',pp.reach>0?(pp.hit+'/'+pp.reach+' = '+pct(pp.hit,pp.reach)):'-');}
+ var b=state.bonus,bt=b.hayajiro+b.episode;['hayajiro','episode','st'].forEach(function(k){var e=document.getElementById('bonus-'+k);if(e&&document.activeElement!==e)e.value=b[k]||0;});setText('bonus-total-rate',rate(state.games,bt));setText('hayajiro-rate',rate(state.games,b.hayajiro));setText('episode-rate',rate(state.games,b.episode));setText('st-rate',rate(state.games,b.st));
+ document.getElementById('log').innerHTML=state.log.length?state.log.map(function(t){return '<div>'+t+'</div>'}).join(''):'<div>まだログなし</div>';
+}
+function syncInputs(){document.getElementById('games').value=state.games;document.getElementById('bells').value=state.bells;Object.keys(META).forEach(function(k){['offChance','normal','band','fromNormal','fromBand','fromOff','forced'].forEach(function(a){var e=document.getElementById(k+'-'+a);if(e)e.value=state.chars[k][a]||0;})});for(var i=1;i<=6;i++){['reach','hit'].forEach(function(a){var e=document.getElementById('period-'+i+'-'+a);if(e)e.value=state.periods[i][a]||0;});}['hayajiro','episode','st'].forEach(function(k){var e=document.getElementById('bonus-'+k);if(e)e.value=state.bonus[k]||0;});}
+function labelFor(k,a){var m=META[k];if(a==='offChance')return m.name+' 非発光チャンス目';if(a==='normal')return m.name+' 通常発光';if(a==='band')return m.name+' 帯付き発光';if(a==='fromNormal')return m.name+' 通常発光→'+m.target;if(a==='fromBand')return m.name+' 帯付き発光→'+m.target;if(a==='forced')return m.name+' 強制周期';return m.name+' 非発光→'+m.target}
+function ptDelta(a){if(a==='offChance')return 1;if(a==='normal'||a==='band')return 15;return 0}
+function recordHit(k){var c=state.chars[k];c.ptReached=c.ptReached||[];c.ptReached.push(c.ptCurrent||0);c.ptCurrent=0;}
+function adjust(k,a,step){var c=state.chars[k],before=c[a]||0;if(step<0&&before<=0)return;var after=clean(before+step),actual=after-before;c[a]=after;var pd=ptDelta(a);if(pd)c.ptCurrent=Math.max(0,(c.ptCurrent||0)+pd*actual);if((a==='fromNormal'||a==='fromBand'||a==='fromOff')&&actual>0)recordHit(k);if((a==='fromNormal'||a==='fromBand'||a==='fromOff')&&actual<0&&c.ptReached&&c.ptReached.length)c.ptReached.pop();}
+makePeriodGrid();
+makeCards();
+document.getElementById('games').addEventListener('input',function(){state.games=clean(this.value);save();redraw()});document.getElementById('games').addEventListener('change',function(){addLog('総G '+state.games);save();redraw()});document.getElementById('bells').addEventListener('input',function(){state.bells=clean(this.value);save();redraw()});document.getElementById('bells').addEventListener('change',function(){addLog('下段ベル '+state.bells);save();redraw()});document.getElementById('bellPlus').onclick=function(){snap();state.bells++;addLog('下段ベル +1');save();syncInputs();redraw()};document.getElementById('bellMinus').onclick=function(){if(!state.bells)return;snap();state.bells--;addLog('下段ベル -1');save();syncInputs();redraw()};
+Array.prototype.forEach.call(document.querySelectorAll('section[data-char] button[data-step]'),function(btn){btn.addEventListener('click',function(){var sec=this.closest('section[data-char]'),k=sec.getAttribute('data-char'),a=this.getAttribute('data-a'),step=Number(this.getAttribute('data-step'));snap();adjust(k,a,step);addLog(labelFor(k,a)+' '+(step>0?'+1':'-1'));save();syncInputs();redraw();})});
+Array.prototype.forEach.call(document.querySelectorAll('section[data-char] input[data-direct]'),function(inp){inp.addEventListener('change',function(){var sec=this.closest('section[data-char]'),k=sec.getAttribute('data-char'),a=this.getAttribute('data-a'),target=clean(this.value),diff=target-(state.chars[k][a]||0);snap();while(diff>0){adjust(k,a,1);diff--;}while(diff<0){adjust(k,a,-1);diff++;}addLog(labelFor(k,a)+' = '+target);save();syncInputs();redraw();})});
+Array.prototype.forEach.call(document.querySelectorAll('button[data-force-reset]'),function(btn){btn.addEventListener('click',function(){snap();var c=state.chars.kurusu;c.forced=(c.forced||0)+1;c.ptCurrent=0;addLog('来栖 強制周期 +1（推定pt区間を参考外として区切り）');save();syncInputs();redraw();})});
+function addPts(keys,pt,label){snap();keys.forEach(function(k){state.chars[k].ptCurrent=(state.chars[k].ptCurrent||0)+pt;});addLog(label);save();redraw();}
+Array.prototype.forEach.call(document.querySelectorAll('button[data-sp]'),function(btn){btn.addEventListener('click',function(){var s=this.getAttribute('data-sp');if(s==='mu-ku-n')addPts(['mumei','kurusu'],15,'複合 無名+来栖 通常 +15pt');if(s==='mu-ku-h')addPts(['mumei','kurusu'],30,'複合 無名+来栖 高確 +30pt');if(s==='mu-ik-n')addPts(['mumei','ikoma'],15,'複合 無名+生駒 通常 +15pt');if(s==='mu-ik-h')addPts(['mumei','ikoma'],30,'複合 無名+生駒 高確 +30pt');if(s==='ku-ik-n')addPts(['kurusu','ikoma'],15,'複合 来栖+生駒 通常 +15pt');if(s==='ku-ik-h')addPts(['kurusu','ikoma'],30,'複合 来栖+生駒 高確 +30pt');if(s==='all-n')addPts(['mumei','kurusu','ikoma'],30,'オールスター 通常 全員+30pt');if(s==='all-h')addPts(['mumei','kurusu','ikoma'],60,'オールスター 高確 全員+60pt');})});
+Array.prototype.forEach.call(document.querySelectorAll('button[data-period]'),function(btn){btn.addEventListener('click',function(){var i=Number(this.getAttribute('data-period')),a=this.getAttribute('data-pa'),step=Number(this.getAttribute('data-step')),p=state.periods[i];if(step<0&&p[a]<=0)return;snap();p[a]=clean(p[a]+step);if(a==='hit'&&p.hit>p.reach)p.reach=p.hit;addLog(i+'周期 '+(a==='reach'?'到達':'当選')+' '+(step>0?'+1':'-1'));save();syncInputs();redraw();})});
+Array.prototype.forEach.call(document.querySelectorAll('input[id^="period-"]'),function(inp){inp.addEventListener('change',function(){var m=this.id.match(/^period-(\d+)-(reach|hit)$/);if(!m)return;var i=Number(m[1]),a=m[2],v=clean(this.value);snap();state.periods[i][a]=v;if(a==='hit'&&state.periods[i].hit>state.periods[i].reach)state.periods[i].reach=state.periods[i].hit;addLog(i+'周期 '+(a==='reach'?'到達':'当選')+' = '+v);save();syncInputs();redraw();})});
+Array.prototype.forEach.call(document.querySelectorAll('button[data-bonus-step]'),function(btn){btn.addEventListener('click',function(){var k=this.getAttribute('data-bonus-step'),step=Number(this.getAttribute('data-step'));if(step<0&&state.bonus[k]<=0)return;snap();state.bonus[k]=clean(state.bonus[k]+step);addLog((k==='hayajiro'?'駿城':k==='episode'?'エピボ':'ST初当たり')+' '+(step>0?'+1':'-1'));save();syncInputs();redraw();})});
+['hayajiro','episode','st'].forEach(function(k){var e=document.getElementById('bonus-'+k);e.addEventListener('change',function(){snap();state.bonus[k]=clean(this.value);addLog((k==='hayajiro'?'駿城':k==='episode'?'エピボ':'ST初当たり')+' = '+state.bonus[k]);save();syncInputs();redraw();});});
+document.getElementById('undo').onclick=function(){if(history.length){state=JSON.parse(history.pop());save();syncInputs();redraw()}};document.getElementById('reset').onclick=function(){if(confirm('全データをリセットしますか？')){state=fresh();history=[];save();syncInputs();redraw()}};syncInputs();redraw();
+})();
+</script>
+</body></html>
